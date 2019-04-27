@@ -1,0 +1,25 @@
+{
+  "name": "busnow",
+  "version": "1.0.0",
+  "description": "get bus location",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/udon242/busnow.git"
+  },
+  "author": "udon242",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/udon242/busnow/issues"
+  },
+  "homepage": "https://github.com/udon242/busnow#readme",
+  "dependencies": {
+    "@types/puppeteer": "^1.12.3",
+    "puppeteer": "^1.15.0",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5"
+  }
+}
