@@ -12,7 +12,7 @@ export class BusNaviDao {
 
         // HTMLからデータを抜き出す
         const evaluateFn = () => {
-            const rowDataList = [];
+            const rowDataList: Array<{predictionTime: string, remainingMinutes: string}> = [];
             document.querySelectorAll('.locationSummary').forEach(node => {
                 const predictionTimeElement = node.getElementsByClassName('predictionTime')[0];
                 const predictionTime = predictionTimeElement ? predictionTimeElement.innerHTML : '';
