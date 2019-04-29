@@ -1,10 +1,10 @@
 import * as puppeteer from 'puppeteer';
-import { IBusNaviResult, IBusNaviResultSet } from '../interface/IBusNaviResult';
 import { getBrowser, getNewPage, getRowData } from '../lib/browserHelper'
-import { cleanString } from '../lib/StringHelper'
+import { IBusNaviResult, IBusNaviResultSet } from '../interface/IBusNaviResult';
 import { BusStop } from '../enum/BusStopId';
+import { cleanString } from '../lib/stringHelper'
 
-export class BusNaviDao {
+export class BusNaviRepository {
     async get(startBusStop: BusStop, goalBusStop: BusStop): Promise<IBusNaviResultSet> {
         const url = `https://transfer.navitime.biz/keiseibus/pc/location/BusLocationResult?startId=${startBusStop}&goalId=${goalBusStop}&sort=predictionDep`;
 
@@ -13,7 +13,7 @@ export class BusNaviDao {
 
         // HTMLからデータを抜き出す
         const evaluateFn = () => {
-            const rowDataList: Array<{predictionTime: string, remainingMinutes: string}> = [];
+            const rowDataList: Array<{ predictionTime: string, remainingMinutes: string }> = [];
             document.querySelectorAll('.locationSummary').forEach(node => {
                 const predictionTimeElement = node.getElementsByClassName('predictionTime')[0];
                 const predictionTime = predictionTimeElement ? predictionTimeElement.innerHTML : '';
@@ -22,7 +22,7 @@ export class BusNaviDao {
                 const remainingMinutesElement = orvPaneElements[3];
                 const remainingMinutes = remainingMinutesElement ? remainingMinutesElement.innerHTML : '';
 
-                rowDataList.push({predictionTime, remainingMinutes});
+                rowDataList.push({ predictionTime, remainingMinutes });
             });
             return rowDataList;
         };
