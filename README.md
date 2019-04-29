@@ -1,5 +1,5 @@
 # busnow
-get bun now location
+Get the bus location now
 
 # Run
 
