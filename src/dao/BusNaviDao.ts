@@ -2,13 +2,14 @@ import * as puppeteer from 'puppeteer';
 import { IBusNaviResult, IBusNaviResultSet } from '../interface/IBusNaviResult';
 import { getBrowser, getNewPage, getRowData } from '../lib/browserHelper'
 import { cleanString } from '../lib/StringHelper'
-
-const URL = 'https://transfer.navitime.biz/keiseibus/pc/location/BusLocationResult?startId=00180459&goalId=00180454&sort=predictionDep';
+import { BusStop } from '../enum/BusStopId';
 
 export class BusNaviDao {
-    async get(): Promise<IBusNaviResultSet> {
+    async get(startBusStop: BusStop, goalBusStop: BusStop): Promise<IBusNaviResultSet> {
+        const url = `https://transfer.navitime.biz/keiseibus/pc/location/BusLocationResult?startId=${startBusStop}&goalId=${goalBusStop}&sort=predictionDep`;
+
         const browser: puppeteer.Browser = await getBrowser();
-        const page: puppeteer.Page = await getNewPage(URL, browser);
+        const page: puppeteer.Page = await getNewPage(url, browser);
 
         // HTMLからデータを抜き出す
         const evaluateFn = () => {
